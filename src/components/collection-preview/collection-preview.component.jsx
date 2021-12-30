@@ -1,0 +1,15 @@
+import CollectionItem from "../collection-item/collection-item.component"
+import '../collection-preview/collection-preview.styles.scss'
+
+const CollectionPreview = ({title,items})=>(
+    <div className='collection-preview'>
+     <h1>{title.toUpperCase()}</h1>   
+    <div className='preview'>
+    {
+        items.filter((item,index)=> index<4).map(({id,...otherProps})=><CollectionItem key={id} {...otherProps}/>)
+    }
+    </div>
+    </div>
+)
+
+export default CollectionPreview
