@@ -1,23 +1,21 @@
-import react from 'react'
-import  SHOP_DATA  from './shop-data'
-import CollectionPreview from '../../components/collection-preview/collection-preview.component'
+import CollectionOverview from '../../components/collection-overview/collection-overview.component'
+import '../shop/shop.styles.scss'
+import { Route ,Routes,useParams} from 'react-router-dom'
+import Category from '../category/category.component'
 
-class ShopPage extends react.Component {
-constructor(){
-    super()
-    this.state = {
-        collections: SHOP_DATA
-    }
-}
-    render(){
-     return (
+const  ShopPage = ()=>{
+    const params = useParams()
+    console.log("paramsShop ",params )
+    return(
          <div className='shop-page'>
-         {
-            this.state.collections.map(({id,...otherProps})=> <CollectionPreview key={id} {...otherProps}/>)
-         }
+         <Routes>
+         <Route path='/'  element={<CollectionOverview/>}/>
+         <Route path='/:categoryId' element={<Category/>}/>
+         </Routes>
+         
+         
          </div>
      )
-    }
 }
 
 export default ShopPage
