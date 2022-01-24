@@ -12,6 +12,8 @@ import { setCurrentUser } from './redux/user/user.actions'
 import { createStructuredSelector } from 'reselect'
 import { selectCurrentUser } from './redux/user/user.selectors'
 import CheckoutPage from './pages/checkout/checkout.component'
+// import { selectCollectionsForOverview } from './redux/shop/shop.selectors'
+// import { addCollectionsAndDocuments } from './firebase/firebase.utils'
 
 const HatsPage = (props) => {
   console.log("props ", useParams())
@@ -60,6 +62,9 @@ class App extends React.Component {
         setCurrentUser(userAuth)
 
     })
+
+    //addCollectionsAndDocuments("collections", this.props.collectionsArray.map(({ title, items }) => ({ title, items })))
+
   }
 
   componentWillUnmount() {
@@ -85,6 +90,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
+  //collectionsArray: selectCollectionsForOverview
 })
 
 const mapDispatchToProps = dispatch => ({

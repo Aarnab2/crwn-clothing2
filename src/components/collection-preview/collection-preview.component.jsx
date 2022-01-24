@@ -1,10 +1,8 @@
 import CollectionItem from "../collection-item/collection-item.component"
 import '../collection-preview/collection-preview.styles.scss'
-import { useNavigate ,useParams} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 const CollectionPreview = ({title,routeName,items})=>{
     const navigate = useNavigate()
-    const params = useParams()
-    console.log('params1 ',params)
     return(
     <div className='collection-preview'>
      <h1 onClick={()=> navigate(`/shop/${routeName}`)}>{title.toUpperCase()}</h1>   

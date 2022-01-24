@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { selectShopCollections } from '../../redux/shop/shop.selectors'
 import CollectionItem from '../../components/collection-item/collection-item.component'
 const Category = ({collections})=>{
-    const params = useParams()
-    console.log("paramsCategory ",params )
-    const collection = collections[params.categoryId]
+     const params = useParams()
+    // console.log("paramsCategory ",params )
+    const collection = collections ? collections[params.categoryId] : null
     const {items,title} = collection
     
     return(

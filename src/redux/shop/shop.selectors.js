@@ -4,12 +4,12 @@ const selectShop = state => state.shop
 
 export const selectShopCollections = createSelector(
     [selectShop],
-    shop => shop.collections
+    shop => shop.collections ? shop.collections : {}
 )
 
 export const selectCollectionsForOverview = createSelector(
     [selectShopCollections],
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => collections ? Object.keys(collections).map(key => collections[key]) : []
 )
 
 // export const selectCategory = categoryUrlParam => createSelector(
