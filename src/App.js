@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import HomePage from './pages/homepage/homepage.component'
 import './pages/homepage/homepage.styles.scss'
 import { Route, Routes, Link, useParams, Navigate } from 'react-router-dom'
@@ -34,7 +34,7 @@ const HatsDetail = () => {
   )
 }
 
-class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
 
   // constructor() {
   //   super()
@@ -45,49 +45,48 @@ class App extends React.Component {
 
   // unsubscribeFromAuth = null
 
-  componentDidMount() {
-    const { checkUserSession } = this.props
+  useEffect(() => {
     checkUserSession()
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  }, [])
+  // const { checkUserSession } = this.props
+  // checkUserSession()
+  // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth) // for saving in firestore
+  //   if (userAuth) {
+  //     const userRef = await createUserProfileDocument(userAuth) // for saving in firestore
 
-    //     console.log("USER ", userRef)
-    //     userRef.onSnapshot(snapshot => { //for saving in state
-    //       console.log('snapshot ', snapshot.data())
-    //       setCurrentUser({ id: snapshot.id, ...snapshot.data() })
+  //     console.log("USER ", userRef)
+  //     userRef.onSnapshot(snapshot => { //for saving in state
+  //       console.log('snapshot ', snapshot.data())
+  //       setCurrentUser({ id: snapshot.id, ...snapshot.data() })
 
-    //     })
-    //   }
-    //   else
-    //     setCurrentUser(userAuth)
+  //     })
+  //   }
+  //   else
+  //     setCurrentUser(userAuth)
 
-    // })
+  // })
 
-    //addCollectionsAndDocuments("collections", this.props.collectionsArray.map(({ title, items }) => ({ title, items })))
+  //addCollectionsAndDocuments("collections", this.props.collectionsArray.map(({ title, items }) => ({ title, items })))
 
-  }
 
-  componentWillUnmount() {
-    //this.unsubscribeFromAuth()
-  }
 
-  render() {
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth()
+  // }
 
-    return (
-      <div>
-        <Header />
-        <Routes>
-          <Route path='/' element={<HomePage age={2} />} />
-          <Route path='/shop/*' element={<ShopPage />} />
-          <Route path='/signin' element={this.props.currentUser ? (<Navigate replace to='/' />) : (<SignInAndSignUpPage />)} />
-          <Route path='/checkout' element={<CheckoutPage />} />
-        </Routes>
+  return (
+    <div>
+      <Header />
+      <Routes>
+        <Route path='/' element={<HomePage age={2} />} />
+        <Route path='/shop/*' element={<ShopPage />} />
+        <Route path='/signin' element={currentUser ? (<Navigate replace to='/' />) : (<SignInAndSignUpPage />)} />
+        <Route path='/checkout' element={<CheckoutPage />} />
+      </Routes>
 
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 const mapStateToProps = createStructuredSelector({

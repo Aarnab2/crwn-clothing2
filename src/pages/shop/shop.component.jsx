@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 //import CollectionOverview from '../../components/collection-overview/collection-overview.component'
 import '../shop/shop.styles.scss'
 import { Route ,Routes} from 'react-router-dom'
@@ -15,12 +15,17 @@ import CategoryContainer from '../category/category.container'
 // const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
 //const CategoryWithSpinner = WithSpinner(Category)
 
-class ShopPage extends React.Component{
+const ShopPage = ({fetchCollectionsStart})=>{
 //    state = {
 //        loading: true
 //    }
   // unsubscribeFromSnapshot = null
-   componentDidMount(){
+
+  useEffect(()=>{
+    fetchCollectionsStart()
+  },[fetchCollectionsStart])
+
+//    componentDidMount(){
        //alert("shop")
     //   const collectionRef = firestore.collection('collections')
     //    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
@@ -38,10 +43,9 @@ class ShopPage extends React.Component{
     //     this.setState({loading:false})
     // })
 
-    this.props.fetchCollectionsStart()
-   }
+//     this.props.fetchCollectionsStart()
+//    }
 
-    render(){
     return(
          <div className='shop-page'>
          <Routes>
@@ -50,7 +54,6 @@ class ShopPage extends React.Component{
          </Routes>
          </div>
      )
-    }
 }//element={this.props.currentUser ? (<Navigate replace to='/' />) : (<SignInAndSignUpPage />)}
 //isLoading={this.props.fetching}
 

@@ -6,22 +6,20 @@ import '../sign-up/sign-up.styles.scss'
 //import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 import { signUpStart } from '../../redux/user/user.actions'
 import { connect } from 'react-redux'
+import { useState } from 'react'
 
-class SignUp extends React.Component{
-constructor(){
-    super()
-    this.state = {
-        email:'',
-        displayName:'',
-        password:'',
-        confirmPassword:''
-    }
-}
+const SignUp = ({signUpStart})=>{
+const [userCredentials,setCredentials] = useState({
+    email:'',
+    displayName:'',
+    password:'',
+    confirmPassword:''
+})
 
-handleSubmit = async(event)=>{
+const {email , displayName , password , confirmPassword} = userCredentials
+
+const handleSubmit = async(event)=>{
     event.preventDefault()
-    const {signUpStart} = this.props
-    const {email , displayName , password , confirmPassword} = this.state
     if(password!==confirmPassword)
     {
         alert('password did not match!')
@@ -31,29 +29,27 @@ handleSubmit = async(event)=>{
     //    const {user} = await auth.createUserWithEmailAndPassword(email,password)
     //    await createUserProfileDocument(user,{displayName})
     signUpStart(email,displayName,password)
-    this.setState({email:'', displayName:'', password:'', confirmPassword:''})
+    setCredentials({email:'', displayName:'', password:'', confirmPassword:''})
     }catch(e){
     console.log(e.message)
     }
 }
 
-handleChange = (event)=>{
+const handleChange = (event)=>{
     const {name,value} = event.target
-    this.setState({[name]:value})
+    setCredentials({...userCredentials,[name]:value})
 }
 
-render(){
-    const {email,displayName,password,confirmPassword} = this.state
 return (
     <div className='sign-up-form'>
     <h2 className='title'>I do not have an account</h2>
     <span>Sign up with your email and password</span>
-    <form onSubmit={this.handleSubmit}>
+    <form onSubmit={handleSubmit}>
     <FormInput
     type='text'
     name='displayName'
     value={displayName}
-    handleChange = {this.handleChange}
+    handleChange = {handleChange}
     label='Display Name'
     required
     />
@@ -61,7 +57,7 @@ return (
     type='email'
     name='email'
     value={email}
-    handleChange = {this.handleChange}
+    handleChange = {handleChange}
     label='Email'
     required
     />
@@ -69,7 +65,7 @@ return (
     type='password'
     name='password'
     value={password}
-    handleChange = {this.handleChange}
+    handleChange = {handleChange}
     label='Password'
     required
     />
@@ -77,7 +73,7 @@ return (
     type='password'
     name='confirmPassword'
     value={confirmPassword}
-    handleChange = {this.handleChange}
+    handleChange = {handleChange}
     label='Confirm Password'
     required
     />
@@ -85,7 +81,7 @@ return (
     </form>
     </div>
 )
-}
+
 }
 
 const mapDispatchToProps = dispatch => ({
