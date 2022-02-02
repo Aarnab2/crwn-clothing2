@@ -7,7 +7,7 @@ import Header from './components/header/header.component'
 import ShopPage from './pages/shop/shop.component'
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions'
 import { createStructuredSelector } from 'reselect'
 import { selectCurrentUser } from './redux/user/user.selectors'
@@ -44,6 +44,7 @@ const App = ({ checkUserSession, currentUser }) => {
   // }
 
   // unsubscribeFromAuth = null
+  const currentUser2 = useSelector(selectCurrentUser)
 
   useEffect(() => {
     checkUserSession()

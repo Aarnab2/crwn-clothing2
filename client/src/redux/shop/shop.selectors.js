@@ -12,10 +12,10 @@ export const selectCollectionsForOverview = createSelector(
     collections => collections ? Object.keys(collections).map(key => collections[key]) : []
 )
 
-// export const selectCategory = categoryUrlParam => createSelector(
-//     [selectShopCollections],
-//     collections => collections[categoryUrlParam]
-// )
+export const selectCategory = categoryUrlParam => createSelector(
+    [selectShopCollections],
+    collections => collections ? collections[categoryUrlParam] : null
+)
 
 export const selectIsCollectionFetching = createSelector(
     [selectShop],

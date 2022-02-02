@@ -1,12 +1,13 @@
 import './category.styles.scss'
 import { useParams } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { selectShopCollections } from '../../redux/shop/shop.selectors'
+import {  selectCategory } from '../../redux/shop/shop.selectors'
 import CollectionItem from '../../components/collection-item/collection-item.component'
-const Category = ({collections})=>{
+import { useSelector } from 'react-redux'
+
+const Category = ()=>{
      const params = useParams()
     // console.log("paramsCategory ",params )
-    const collection = collections ? collections[params.categoryId] : null
+    const collection = useSelector(selectCategory(params.categoryId))
     const {items,title} = collection
     
     return(
@@ -20,8 +21,8 @@ const Category = ({collections})=>{
     </div>
 )}
 
-const mapStateToProps = state => ({
-collections: selectShopCollections(state)
-})
+// const mapStateToProps = state => ({
+// collections: selectShopCollections(state)
+// })
 
-export default connect(mapStateToProps)(Category)
+export default Category
